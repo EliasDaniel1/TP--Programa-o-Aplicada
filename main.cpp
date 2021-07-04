@@ -99,3 +99,60 @@ void escrever(int quant, tLista* pLista) {
     gravarLista(pLista, & arquivo);
     arquivo.close();
 }
+void ler() {
+    string line;
+    tLista* leitura = new tLista;
+    iniciaLista(leitura);
+
+    ifstream inFile("db.txt", ios:: in );
+    if (!inFile) {
+        cout << "Arquivo db.txt nao pode ser aberto" << endl;
+        abort();
+    }
+    if (inFile.peek() == ifstream::traits_type::eof()) {
+        cout << "Arquivo vazio\n";
+    }
+    while(getline(inFile, line)){
+            float a = 0;
+            float b = 0;
+            
+            string sreal, simaginario;
+            int wordpos = 0;
+            
+        for(int i = 0; i < line.length(); i++){
+            if(wordpos == 0){
+                if(line[i] != ' '){
+                    sreal += line[i];
+                }
+                else{
+                    wordpos++;
+                    continue;
+                }
+            }
+            if(wordpos == 1){
+                if(line[i] != ' '){
+                    simaginario += line[i];
+                }
+                else{
+                    wordpos++;
+                    continue;
+                }
+            }  
+        }
+        a = stof(sreal);
+        b = stof(simaginario);
+        incluirNoFim(leitura, a, b);
+    }
+    
+    leitura->marcador = leitura->primeiro;
+
+    while (!finalLista(leitura)) {
+        float a= leitura->marcador->a;
+        float b = leitura->marcador->b;
+        cout << "Real: " << a << " - " << "Imaginário: " << b << " = " << a << "+" << b << "i" << endl;
+
+        leitura->marcador = leitura->marcador->proximo;
+    }
+    free(leitura);
+    inFile.close();
+}
