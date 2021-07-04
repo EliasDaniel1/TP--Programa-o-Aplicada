@@ -156,3 +156,39 @@ void ler() {
     free(leitura);
     inFile.close();
 }
+int main() {
+    int loop = 1;
+    tLista* tComplexList = new tLista;
+    iniciaLista(tComplexList);
+    while (loop == 1) {
+        int input;
+        cout << "\nDigite 1 para escrever no banco de dados - 2 para ler o banco de dados - 3 para sair\n";
+        cin >> input;
+
+        switch (input) {
+        case (1):
+            int quant;
+            cout << "Quantos números complexos deseja gravar?\n";
+            cin >> quant;
+            if (quant > 0) {
+                escrever(quant, tComplexList);
+            } else {
+                cout << "Quantidade inválida\n";
+            }
+            break;
+        case (2):
+            cout << "\n\nRealizando leitura: " << endl;
+            ler();
+            break;
+        case (3):
+            loop = 2;
+            break;
+
+        default:
+            cout << "Valor indefinido\n";
+            break;
+        }
+    }
+    free(tComplexList);
+    return 0;
+}
