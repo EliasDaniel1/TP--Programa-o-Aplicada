@@ -17,3 +17,28 @@ tComplexo* criatComplexo(float real1, float imaginario1 ){
 
   return tComplex;
 }
+struct tLista {
+    tComplexo* primeiro;
+    tComplexo* ultimo;
+    tComplexo* marcador;
+    int tamanho;
+};
+
+void iniciaLista(tLista* pLista) {
+    pLista->primeiro = NULL;
+    pLista->ultimo = NULL;
+    pLista->marcador = NULL;
+    pLista->tamanho = 0;
+}
+
+int obterTamanho(tLista* pLista) {
+    return pLista->tamanho;
+}
+
+bool listaVazia(tLista* pLista) {
+    return (pLista->tamanho == 0);
+}
+
+bool finalLista(tLista* pLista) {
+    return (pLista->marcador == NULL);
+}
