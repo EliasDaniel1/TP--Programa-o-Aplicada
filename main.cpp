@@ -42,3 +42,31 @@ bool listaVazia(tLista* pLista) {
 bool finalLista(tLista* pLista) {
     return (pLista->marcador == NULL);
 }
+void incluirNoFim(tLista* pLista, float real1, float imaginario1)
+{
+  tComplexo* tComplex = criatComplexo(real1, imaginario1);
+
+     if (listaVazia(pLista)) {
+        pLista->primeiro = tComplex;
+    } else {
+        pLista->ultimo->proximo = tComplex;
+    }
+
+    pLista->ultimo = tComplex;
+    pLista->marcador = tComplex;
+    pLista->tamanho++;
+}
+void gravarLista(tLista* pLista, ofstream* outfile) {
+    pLista->marcador = pLista->primeiro;
+
+    while (!finalLista(pLista)) {
+        float real1 = pLista->marcador->a;
+        float imag1 = pLista->marcador->b;
+
+        cout << "Número Complexo:" << " " << real1 << "+" << imag1 << "i" << endl;
+        *outfile << real1 << " " << imag1 << endl;
+
+        pLista->marcador = pLista->marcador->proximo;
+    }
+    *outfile << flush;
+}
