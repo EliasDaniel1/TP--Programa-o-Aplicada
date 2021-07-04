@@ -70,3 +70,32 @@ void gravarLista(tLista* pLista, ofstream* outfile) {
     }
     *outfile << flush;
 }
+
+void escrever(int quant, tLista* pLista) {
+    ofstream arquivo("db.txt", ios::out);
+    if (!arquivo) {
+        cout << "Arquivo db.txt nao pode ser aberto" << endl;
+        abort();
+    }
+
+    for (int i = 0; i < quant; i++) {
+        float a = 0;
+        float b = 0;
+       
+        while(1){
+            {
+                cout << "\nRegistro numero: " << i + 1 << endl;
+                cout << "Digite o número real: ";
+                cin >> a;
+                cout << "Digite o número imaginário: ";
+                cin >> b;             
+                break;
+            }
+        }
+        incluirNoFim(pLista, a, b);
+
+    }
+    cout << "\nGravado: " << endl;
+    gravarLista(pLista, & arquivo);
+    arquivo.close();
+}
